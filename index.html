@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+
+<div id="container">
+  <h1>Guess the Number</h1>
+  <input id="guessnumber" type="number" placeholder="Enter your guess" min="1" max="10">
+  <button onclick="check()">Check</button>
+  <p id="result">You are Wrong/Right</p>
+  <p id="score">Score: 10</p>
+</div>
+
+<script>
+  var guessnumber = document.getElementById("guessnumber");
+  var result = document.getElementById("result");
+  var score = document.getElementById("score");
+
+  var randomNumber = Math.floor(Math.random() * 10) + 1;
+  var totalscore = 10;
+
+  function check() {
+    var enterednumber = parseInt(guessnumber.value);
+    if (randomNumber === enterednumber) {
+      console.log("Right");
+      result.textContent = "Right";
+      celebrate();
+      // alert("YOU WON..."); // Commented out the alert
+    } else {
+      totalscore = totalscore - 1;
+      score.textContent = "Score: " + totalscore;
+
+      if (totalscore === 0) {
+        alert("YOU LOSE...");
+      } else {
+        result.textContent = "Wrong";
+      }
+    }
+  }
+
+  function celebrate() {
+    // Add celebratory pop-up here
+    var popUp = document.createElement("div");
+    popUp.className = "celebration-popup animate__animated animate__zoomIn";
+    popUp.textContent = "🎉 Congratulations! You Won! 🎉";
+    document.body.appendChild(popUp);
+
+    setTimeout(function () {
+      popUp.remove();
+    }, 3000); // Remove the pop-up after 3 seconds
+  }
+</script>
+
+</body>
+</html>
